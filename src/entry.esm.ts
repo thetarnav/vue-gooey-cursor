@@ -1,7 +1,7 @@
 import { App, Plugin } from 'vue'
 
 // Import vue component
-import component from '@/vue-glitched-writer.vue'
+import component from '@/vue-gooey-cursor.vue'
 
 // Define typescript interfaces for installable component
 type InstallableComponent = typeof component & {
@@ -17,7 +17,7 @@ export default /*#__PURE__*/ ((): InstallableComponent => {
 
 	// Attach install function executed by Vue.use()
 	installable.install = (app: App) => {
-		app.component('VueGlitchedWriter', installable)
+		app.component('VueGooeyCursor', installable)
 	}
 	return installable
 })()
@@ -25,21 +25,3 @@ export default /*#__PURE__*/ ((): InstallableComponent => {
 // It's possible to expose named exports when writing components that can
 // also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
 // export const RollupDemoDirective = directive;
-import GlitchedWriter, {
-	presets,
-	wait,
-	glyphs,
-	CustomOptions,
-	Callback,
-	WriterDataResponse,
-} from 'glitched-writer'
-
-export {
-	presets,
-	wait,
-	glyphs,
-	CustomOptions,
-	Callback,
-	GlitchedWriter,
-	WriterDataResponse,
-}

@@ -1,18 +1,18 @@
 {
-  "name": "vue-glitched-writer",
-  "version": "1.2.2",
-  "description": "Vue.js Single File Component. Wrapper for Glitched Writer: text-writing js module.",
+  "name": "vue-gooey-cursor",
+  "version": "1.0.0",
+  "description": "Gooey Cursor Component for Vue 3",
   "author": "Damian Tarnawski @thetarnav <gthetarnav@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thetarnav/vue-glitched-writer.git"
+    "url": "git+https://github.com/thetarnav/vue-gooey-cursor.git"
   },
-  "homepage": "https://glitched-writer.site/",
-  "main": "dist/vue-glitched-writer.ssr.js",
-  "browser": "dist/vue-glitched-writer.esm.js",
-  "module": "dist/vue-glitched-writer.esm.js",
-  "unpkg": "dist/vue-glitched-writer.min.js",
+  "homepage": "https://github.com/thetarnav/vue-gooey-cursor#readme",
+  "main": "dist/vue-gooey-cursor.ssr.js",
+  "browser": "dist/vue-gooey-cursor.esm.js",
+  "module": "dist/vue-gooey-cursor.esm.js",
+  "unpkg": "dist/vue-gooey-cursor.min.js",
   "types": "dist/types/src/entry.esm.d.ts",
   "files": [
     "dist/*",
@@ -31,8 +31,7 @@
     "postpublish": "git push && git push --tags"
   },
   "dependencies": {
-    "glitched-writer": "^2.0.29",
-    "vue-demi": "^0.11.2"
+    "vue-global-events": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -57,20 +56,14 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-vue": "^6.0.0",
-    "sass": "^1.37.2",
+    "sass": "^1.37.5",
+    "sass-loader": "^10.2.0",
     "ttypescript": "^1.5.12",
     "typescript": "^4.0.3",
-    "vue": "^3.0.5",
-    "sass-loader": "^10.2.0"
+    "vue": "^3.0.5"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": "^3.0.5"
   },
   "engines": {
     "node": ">=12"
@@ -78,15 +71,8 @@
   "keywords": [
     "vue",
     "vue3",
-    "glitch",
-    "text",
-    "decrypt",
-    "decode",
-    "scramble",
-    "animation",
-    "front-end",
-    "web",
-    "html",
-    "typewriter"
+    "gooey",
+    "cursor",
+    "fluid"
   ]
 }

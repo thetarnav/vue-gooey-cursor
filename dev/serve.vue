@@ -1,102 +1,44 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-// import GlitchedWriter from '@/vue-glitched-writer.vue'
+import { defineComponent } from 'vue'
+// import GlitchedWriter from '@/vue-gooey-cursor.vue'
 // @ts-ignore
-import * as gw from '../dist/vue-glitched-writer.esm.js'
+import * as gooey from '../dist/vue-gooey-cursor.esm.js'
 
-console.log(gw)
+console.log(gooey)
 
 export default defineComponent({
 	name: 'HelloWorld',
 	components: {
-		GlitchedWriter: gw.default,
+		GooeyCursor: gooey.default,
 	},
 	setup() {
-		const paragraph = `
-		For a guide and recipes on how to configure / customize this project, <br/>
-      check out the <a href="https://github.com/thetarnav/vue-glitched-writer" target="_blank">vue glitched writer repo</a>.`,
-			texts = [
-				'First Text Of The Queue.',
-				'Second Item of the Queue!',
-				'Next up is...',
-				'THE LAST ONE',
-			]
-
-		const inputText = ref('Welcome to Vue Glitched Writer!')
-
-		return {
-			paragraph,
-			texts,
-			inputText,
-		}
+		return {}
 	},
 })
 </script>
 
 <template>
-	<div id="app">
-		<GlitchedWriter
-			tag="h1"
-			:text="inputText"
-			:options="{ letterize: true }"
-			appear
-			class="text"
-		/>
-		<GlitchedWriter
-			tag="p"
-			:text="paragraph"
-			:options="{ html: true }"
-			appear
-			class="paragraph"
-		/>
-		<GlitchedWriter
-			tag="p"
-			:text="texts"
-			:queue="{
-				loop: true,
-			}"
-			preset="encrypted"
-			:options="{ letterize: true }"
-			appear
-			class="queue-text"
-		/>
-
-		<input class="input" v-model.lazy="inputText" />
-	</div>
+	<GooeyCursor />
 </template>
 
-<style lang="scss" src="./style.scss" />
-
 <style lang="scss">
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+html {
+	cursor: none;
+}
 #app {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	color: white;
 
 	> * {
 		margin: 20px auto;
-	}
-}
-
-.paragraph {
-	font-family: monospace;
-}
-
-.queue-text {
-	font-family: monospace;
-	will-change: contents, width;
-	font-size: 2rem;
-
-	.gw-char:not(.gw-finished) {
-		.gw-ghosts {
-			opacity: 0.5;
-		}
-	}
-	.gw-glitched {
-		opacity: 0.5;
 	}
 }
 </style>
