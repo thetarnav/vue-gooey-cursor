@@ -45,9 +45,7 @@ const baseConfig = {
 		replace: {
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		},
-		vue: {
-			preprocessStyles: true,
-		},
+		vue: {},
 		postVue: [
 			resolve({
 				extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],

@@ -1,11 +1,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import GooeyCursor from '@/vue-gooey-cursor.vue'
+// import GlitchedWriter from '@/vue-gooey-cursor.vue'
+// @ts-ignore
+import * as gooey from '../dist/vue-gooey-cursor.esm.js'
+
+console.log(gooey)
 
 export default defineComponent({
-	name: 'ServeDev',
+	name: 'HelloWorld',
 	components: {
-		GooeyCursor,
+		GooeyCursor: gooey.default,
+	},
+	setup() {
+		return {}
 	},
 })
 </script>
@@ -22,5 +29,16 @@ body {
 }
 html {
 	cursor: none;
+}
+#app {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+
+	> * {
+		margin: 20px auto;
+	}
 }
 </style>
