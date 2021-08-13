@@ -1,7 +1,14 @@
 {
   "name": "vue-gooey-cursor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Gooey Cursor Component for Vue 3",
+  "author": "Damian Tarnawski @thetarnav <gthetarnav@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thetarnav/vue-gooey-cursor.git"
+  },
+  "homepage": "https://github.com/thetarnav/vue-gooey-cursor#readme",
   "main": "dist/vue-gooey-cursor.ssr.js",
   "browser": "dist/vue-gooey-cursor.esm.js",
   "module": "dist/vue-gooey-cursor.esm.js",
@@ -58,5 +65,12 @@
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "gooey",
+    "cursor",
+    "fluid"
+  ]
 }
