@@ -33,6 +33,7 @@ export default defineComponent({
 		size: { type: Number, default: 32 },
 		length: { type: Number, default: 8 },
 		color: { type: String, default: undefined },
+		hover: { type: String, default: 'a, button' },
 	},
 	setup(props) {
 		let animation: number
@@ -45,8 +46,10 @@ export default defineComponent({
 		}[] = []
 
 		const cursorEl = ref<HTMLElement>()
+
 		const mouseOut = ref(true),
-			clicking = ref(false)
+			clicking = ref(false),
+			hoverActive = ref(false)
 
 		function draw() {
 			cursors.forEach(({ el, p }) => followMouse(el, p, target))
@@ -54,6 +57,9 @@ export default defineComponent({
 		}
 
 		function handleMouseMove(e: MouseEvent) {
+			const el = e.target as Element | null
+			hoverActive.value = !!el?.matches(props.hover)
+
 			mouseOut.value = false
 			target.x = e.clientX - props.size / 2
 			target.y = e.clientY - props.size / 2
@@ -85,19 +91,14 @@ export default defineComponent({
 			handleMouseMove,
 			mouseOut,
 			clicking,
+			hoverActive,
 		}
 	},
 })
 </script>
 
 <template>
-	<!-- <div> -->
-	<svg
-		class="svg-effect"
-		xmlns="http://www.w3.org/2000/svg"
-		version="1.1"
-		width="800"
-	>
+	<svg class="svg-effect">
 		<defs>
 			<filter id="goo">
 				<feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
@@ -115,9 +116,9 @@ export default defineComponent({
 	<div
 		ref="cursorEl"
 		class="cursor"
-		:class="{ mouseOut, clicking }"
+		:class="{ mouseOut, clicking, hoverActive }"
 		:style="// @ts-ignore
-		{ '--color': color || '' }"
+		{ '--color': color || '', '--size': size ? `${size}px` : '' }"
 	>
 		<div v-for="i in length" :key="i">
 			<svg viewBox="0 0 10 10">
@@ -134,11 +135,11 @@ export default defineComponent({
 		@mousedown="clicking = true"
 		@mouseup="clicking = false"
 	/>
-	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
 $size: 2rem;
+$color: #42b883;
 $bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 
 .svg-effect {
@@ -150,24 +151,17 @@ $bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 }
 
 .cursor {
-	pointer-events: none;
-	position: absolute;
-	top: 0;
-	left: 0;
+	pointer-events: none !important;
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
 	filter: url('#goo');
-	width: $size;
-	height: $size;
-
+	width: var(--size, #{$size});
+	height: var(--size, #{$size});
+	--largest-scale: 1;
 	transition: opacity 0.2s;
-
-	&.mouseOut {
-		opacity: 0;
-	}
-
-	--click-scale: 1;
-	&.clicking {
-		--click-scale: 1.3;
-	}
 
 	div {
 		--scale: 1;
@@ -179,22 +173,40 @@ $bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 		width: 100%;
 		height: 100%;
 		will-change: transform;
+
 		svg {
 			margin: auto;
 			width: 100%;
 			height: 100%;
 			transform: scale(var(--scale));
 			circle {
-				fill: var(--color, #42b883);
+				fill: var(--color, #{$color});
 			}
 		}
 		// the largest
 		&:last-of-type {
 			svg {
-				transform: scale(var(--click-scale));
+				transform: scale(var(--largest-scale));
 				transition: transform 100ms $bouncy-easing;
 			}
 		}
+	}
+
+	&.mouseOut {
+		opacity: 0;
+	}
+
+	&.hoverActive {
+		opacity: 0.6;
+		--largest-scale: 1.4;
+
+		&.clicking {
+			--largest-scale: 1.1;
+		}
+	}
+
+	&.clicking {
+		--largest-scale: 1.3;
 	}
 }
 </style>

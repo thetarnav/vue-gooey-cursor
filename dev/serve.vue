@@ -1,15 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import GlitchedWriter from '@/vue-gooey-cursor.vue'
+import GooeyCursor from '@/vue-gooey-cursor.vue'
 // @ts-ignore
-import * as gooey from '../dist/vue-gooey-cursor.esm.js'
+// import GooeyCursor from '../dist/vue-gooey-cursor.esm.js'
 
-console.log(gooey)
+// console.log(gooey)
 
 export default defineComponent({
 	name: 'HelloWorld',
 	components: {
-		GooeyCursor: gooey.default,
+		GooeyCursor,
 	},
 	setup() {
 		return {}
@@ -19,15 +19,30 @@ export default defineComponent({
 
 <template>
 	<GooeyCursor />
+	<a href="#">link test</a>
+	<div class="box"></div>
+	<button>button test</button>
+	<p>
+		Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur
+		voluptatem labore soluta doloremque sapiente, ab nostrum dolorem? Minus
+		consequuntur, exercitationem, laborum vitae, dignissimos cum optio saepe
+		molestiae soluta nemo praesentium!
+	</p>
 </template>
 
 <style lang="scss">
 body {
-	width: 100vw;
-	height: 100vh;
+	min-width: 100vw;
+	min-height: 100vh;
 	overflow: hidden;
 }
 html {
+	cursor: none;
+}
+a {
+	cursor: none;
+}
+button {
 	cursor: none;
 }
 #app {
@@ -39,6 +54,12 @@ html {
 
 	> * {
 		margin: 20px auto;
+	}
+
+	.box {
+		width: 200px;
+		height: 300px;
+		background: #000;
 	}
 }
 </style>
