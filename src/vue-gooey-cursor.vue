@@ -137,66 +137,9 @@ export default defineComponent({
 	<!-- </div> -->
 </template>
 
-<style lang="css" scoped>
-/* $size: 2rem;
-	$bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
-	
-	.svg-effect {
-		position: absolute;
-		width: 0;
-		height: 0;
-		display: none;
-		pointer-events: none;
-	}
-	
-	.cursor {
-		pointer-events: none;
-		position: absolute;
-		top: 0;
-		left: 0;
-		filter: url('#goo');
-		width: $size;
-		height: $size;
-	
-		transition: opacity 0.2s;
-	
-		&.mouseOut {
-			opacity: 0;
-		}
-	
-		--click-scale: 1;
-		&.clicking {
-			--click-scale: 1.3;
-		}
-	
-		div {
-			--scale: 1;
-			position: absolute;
-			display: flex;
-			box-sizing: border-box;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			will-change: transform;
-			svg {
-				margin: auto;
-				width: 100%;
-				height: 100%;
-				transform: scale(var(--scale));
-				circle {
-					fill: var(--color, #42b883);
-				}
-			}
-			// the largest
-			&:last-of-type {
-				svg {
-					transform: scale(var(--click-scale));
-					transition: transform 100ms $bouncy-easing;
-				}
-			}
-		}
-	} */
+<style lang="scss" scoped>
+$size: 2rem;
+$bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 
 .svg-effect {
 	position: absolute;
@@ -205,46 +148,53 @@ export default defineComponent({
 	display: none;
 	pointer-events: none;
 }
+
 .cursor {
-	pointer-events: none !important;
-	position: absolute !important;
-	top: 0 !important;
-	left: 0 !important;
-	margin: 0 !important;
-	filter: url('#goo');
-	width: 2rem;
-	height: 2rem;
-	transition: opacity 0.2s;
-	--click-scale: 1;
-}
-.cursor.mouseOut {
-	opacity: 0;
-}
-.cursor.clicking {
-	--click-scale: 1.3;
-}
-.cursor div {
-	--scale: 1;
+	pointer-events: none;
 	position: absolute;
-	display: flex;
-	box-sizing: border-box;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	will-change: transform;
-}
-.cursor div svg {
-	margin: auto;
-	width: 100%;
-	height: 100%;
-	transform: scale(var(--scale));
-}
-.cursor div svg circle {
-	fill: var(--color, #42b883);
-}
-.cursor div:last-of-type svg {
-	transform: scale(var(--click-scale));
-	transition: transform 100ms cubic-bezier(0.51, 0.06, 0.56, 1.37);
+	filter: url('#goo');
+	width: $size;
+	height: $size;
+
+	transition: opacity 0.2s;
+
+	&.mouseOut {
+		opacity: 0;
+	}
+
+	--click-scale: 1;
+	&.clicking {
+		--click-scale: 1.3;
+	}
+
+	div {
+		--scale: 1;
+		position: absolute;
+		display: flex;
+		box-sizing: border-box;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		will-change: transform;
+		svg {
+			margin: auto;
+			width: 100%;
+			height: 100%;
+			transform: scale(var(--scale));
+			circle {
+				fill: var(--color, #42b883);
+			}
+		}
+		// the largest
+		&:last-of-type {
+			svg {
+				transform: scale(var(--click-scale));
+				transition: transform 100ms $bouncy-easing;
+			}
+		}
+	}
 }
 </style>
