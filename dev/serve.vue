@@ -1,17 +1,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import VueGooeyCursor from '@/vue-gooey-cursor.vue'
+import GooeyCursor from '@/vue-gooey-cursor.vue'
 
 export default defineComponent({
 	name: 'ServeDev',
 	components: {
-		VueGooeyCursor,
+		GooeyCursor,
 	},
 })
 </script>
 
 <template>
-	<vue-gooey-cursor />
+	<GooeyCursor />
 </template>
 
 <style lang="scss">

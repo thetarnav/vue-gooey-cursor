@@ -29,12 +29,15 @@ export default defineComponent({
 	components: {
 		GlobalEvents,
 	},
-	setup() {
+	props: {
+		size: { type: Number, default: 32 },
+		length: { type: Number, default: 8 },
+		color: { type: String, default: undefined },
+	},
+	setup(props) {
 		let animation: number
 
-		const target: XY = { x: 0, y: 0 },
-			size: XY = { x: 32, y: 32 },
-			nCircles = 8
+		const target: XY = { x: 0, y: 0 }
 
 		const cursors: {
 			el: HTMLElement
@@ -42,7 +45,8 @@ export default defineComponent({
 		}[] = []
 
 		const cursorEl = ref<HTMLElement>()
-		const mouseOut = ref(true)
+		const mouseOut = ref(true),
+			clicking = ref(false)
 
 		function draw() {
 			cursors.forEach(({ el, p }) => followMouse(el, p, target))
@@ -51,8 +55,8 @@ export default defineComponent({
 
 		function handleMouseMove(e: MouseEvent) {
 			mouseOut.value = false
-			target.x = e.clientX - size.x / 2
-			target.y = e.clientY - size.y / 2
+			target.x = e.clientX - props.size / 2
+			target.y = e.clientY - props.size / 2
 		}
 
 		onMounted(() => {
@@ -61,7 +65,7 @@ export default defineComponent({
 			const children = cursorEl.value?.children
 			if (children) {
 				;([...children] as HTMLElement[]).forEach((el, i) => {
-					const p = valToP(i + 1, 0, nCircles)
+					const p = valToP(i + 1, 0, props.length)
 					cursors.push({
 						el,
 						p,
@@ -78,9 +82,9 @@ export default defineComponent({
 
 		return {
 			cursorEl,
-			nCircles,
 			handleMouseMove,
 			mouseOut,
+			clicking,
 		}
 	},
 })
@@ -107,8 +111,14 @@ export default defineComponent({
 		</defs>
 	</svg>
 
-	<div ref="cursorEl" class="cursor" :class="{ mouseOut }">
-		<div v-for="i in nCircles" :key="i">
+	<div
+		ref="cursorEl"
+		class="cursor"
+		:class="{ mouseOut, clicking }"
+		:style="// @ts-ignore
+		{ '--color': color || '' }"
+	>
+		<div v-for="i in length" :key="i">
 			<svg viewBox="0 0 10 10">
 				<circle cx="5" cy="5" r="4" />
 			</svg>
@@ -120,11 +130,14 @@ export default defineComponent({
 		@mouseout="mouseOut = true"
 		@mouseleave="mouseOut = true"
 		@mouseenter="mouseOut = false"
+		@mousedown="clicking = true"
+		@mouseup="clicking = false"
 	/>
 </template>
 
 <style lang="scss" scoped>
 $size: 2rem;
+$bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 
 .svg-effect {
 	position: absolute;
@@ -146,6 +159,15 @@ $size: 2rem;
 
 	transition: opacity 0.2s;
 
+	&.mouseOut {
+		opacity: 0;
+	}
+
+	--click-scale: 1;
+	&.clicking {
+		--click-scale: 1.3;
+	}
+
 	div {
 		--scale: 1;
 		position: absolute;
@@ -158,16 +180,20 @@ $size: 2rem;
 		will-change: transform;
 		svg {
 			margin: auto;
-			width: calc(var(--scale) * #{$size});
-			height: calc(var(--scale) * #{$size});
+			width: 100%;
+			height: 100%;
+			transform: scale(var(--scale));
 			circle {
-				fill: red;
+				fill: var(--color, #42b883);
+			}
+		}
+		// the largest
+		&:last-of-type {
+			svg {
+				transform: scale(var(--click-scale));
+				transition: transform 100ms $bouncy-easing;
 			}
 		}
 	}
-}
-
-.mouseOut {
-	opacity: 0;
 }
 </style>
