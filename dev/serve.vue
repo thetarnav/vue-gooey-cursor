@@ -28,6 +28,7 @@ export default defineComponent({
 		consequuntur, exercitationem, laborum vitae, dignissimos cum optio saepe
 		molestiae soluta nemo praesentium!
 	</p>
+	<div class="fixed-box"></div>
 </template>
 
 <style lang="scss">
@@ -61,5 +62,17 @@ button {
 		height: 300px;
 		background: #000;
 	}
+}
+.fixed-box {
+	position: fixed;
+	right: 5vw;
+	top: 50vh;
+	left: 65vw;
+	bottom: 30vh;
+	background: red;
+}
+
+.cursor {
+	--color: orange;
 }
 </style>

@@ -2,13 +2,13 @@
 
 Gooey Cursor Component for Vue 3.
 
-### Install
+## Install
 
 ```sh
 npm i vue-gooey-cursor
 ```
 
-### Register the component
+## Register the component
 
 ```js
 import GooeyCursor from 'vue-gooey-cursor'
@@ -23,7 +23,7 @@ export default {
 }
 ```
 
-### Usage
+## Usage
 
 ```html
 <!-- simple -->
@@ -33,7 +33,7 @@ export default {
 <GooeyCursor color="#42b883" :size="32" :length="8" hover="a, button" />
 ```
 
-### Props
+## Props
 
 #### color
 
@@ -59,7 +59,7 @@ export default {
 -  Type: `String`
 -  selector string, cursor will grow and turn transparent while hoverind on these elements
 
-### Styles
+## Styles
 
 For the cursor to work correctly, please apply these base styles to your page:
 
@@ -77,5 +77,16 @@ a {
 }
 button {
 	cursor: none;
+}
+```
+
+## CSS Variables
+
+Some css properties can be easily changed by setting css variables.
+
+```css
+.gooey-cursor {
+	--z-index: 1000; /* default: 9999 */
+	--color: orange; /* default: #42b883 */
 }
 ```

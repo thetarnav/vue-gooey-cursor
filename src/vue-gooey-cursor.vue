@@ -100,22 +100,26 @@ export default defineComponent({
 <template>
 	<svg class="svg-effect">
 		<defs>
-			<filter id="goo">
+			<filter id="gooey-cursor-svg-effect">
 				<feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
 				<feColorMatrix
 					in="blur"
 					mode="matrix"
 					values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -15"
-					result="goo"
+					result="gooey-cursor-svg-effect"
 				/>
-				<feComposite in="SourceGraphic" in2="goo" operator="atop" />
+				<feComposite
+					in="SourceGraphic"
+					in2="gooey-cursor-svg-effect"
+					operator="atop"
+				/>
 			</filter>
 		</defs>
 	</svg>
 
 	<div
 		ref="cursorEl"
-		class="cursor"
+		class="gooey-cursor"
 		:class="{ mouseOut, clicking, hoverActive }"
 		:style="// @ts-ignore
 		{ '--color': color || '', '--size': size ? `${size}px` : '' }"
@@ -150,14 +154,15 @@ $bouncy-easing: cubic-bezier(0.51, 0.06, 0.56, 1.37);
 	pointer-events: none;
 }
 
-.cursor {
+.gooey-cursor {
 	pointer-events: none !important;
-	position: absolute !important;
+	position: fixed !important;
+	z-index: var(--z-index, 9999);
 	top: 0 !important;
 	left: 0 !important;
 	margin: 0 !important;
 	padding: 0 !important;
-	filter: url('#goo');
+	filter: url('#gooey-cursor-svg-effect');
 	width: var(--size, #{$size});
 	height: var(--size, #{$size});
 	--largest-scale: 1;
